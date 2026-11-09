@@ -1,28 +1,89 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A secure static website delivered through AWS CloudFront and a private S3 origin.">
-  <title>AWS Cloud Engineering | Secure Static Delivery</title>
-  <style>
-    :root { color-scheme: dark; font-family: Inter, system-ui, sans-serif; }
-    * { box-sizing: border-box; }
-    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 2rem; background: #101827; color: #f3f6fb; }
-    main { width: min(760px, 100%); padding: clamp(2rem, 6vw, 4rem); border: 1px solid #34445e; border-radius: 22px; background: #172337; box-shadow: 0 24px 80px #0005; }
-    .tag { color: #8bd5ff; font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-    h1 { margin: 1rem 0; font-size: clamp(2.2rem, 7vw, 4rem); line-height: 1.05; }
-    p { color: #bac7d9; line-height: 1.7; }
-    .stack { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 2rem; }
-    .stack span { padding: .55rem .8rem; border: 1px solid #405570; border-radius: 999px; color: #d8e7f7; font-size: .9rem; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Secure AWS Cloud Infrastructure | Adamya Panwar</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b1020;color:#edf3ff;font-family:Arial,sans-serif;line-height:1.6}
+.wrap{max-width:1080px;margin:auto;padding:30px 22px}
+nav{display:flex;justify-content:space-between;border-bottom:1px solid #263653;padding-bottom:20px}
+nav strong{color:#77d9ec;letter-spacing:2px}
+a{color:#77d9ec;text-decoration:none}
+.hero{padding:75px 0 45px}
+.tag{color:#77d9ec;font-size:13px;letter-spacing:3px}
+h1{font-size:clamp(38px,7vw,68px);line-height:1.08;margin:18px 0}
+h1 span{color:#77d9ec}
+p{color:#aab8ce}
+.btn{display:inline-block;padding:12px 19px;border-radius:8px;margin:15px 8px 10px 0;background:#77d9ec;color:#101827;font-weight:bold}
+.btn.alt{background:#17243b;color:white;border:1px solid #405570}
+.notice{padding:17px;background:#302817;border:1px solid #806535;border-radius:10px;color:#ffe4a9}
+h2{margin-top:55px;font-size:27px}
+.arch{display:grid;grid-template-columns:1fr 55px 1fr 55px 1fr;gap:10px;align-items:center;margin-top:25px}
+.card{background:#131e33;border:1px solid #30435e;border-radius:12px;padding:22px}
+.card h3{color:#77d9ec}
+.arrow{text-align:center;font-size:25px;color:#77d9ec}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:22px}
+.grid .card{min-height:170px}
+small{color:#77d9ec}
+footer{margin-top:65px;border-top:1px solid #263653;padding:25px 0;color:#8192aa}
+@media(max-width:700px){.arch{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}.grid{grid-template-columns:1fr}nav{gap:10px;flex-wrap:wrap}}
+</style>
 </head>
 <body>
-  <main>
-    <div class="tag">Cloud engineering project</div>
-    <h1>Secure static content delivery on AWS.</h1>
-    <p>This site is designed to be stored in a private Amazon S3 bucket and delivered globally over HTTPS through Amazon CloudFront using Origin Access Control.</p>
-    <div class="stack"><span>Amazon S3</span><span>CloudFront</span><span>Terraform</span><span>GitHub Actions</span></div>
-  </main>
+<div class="wrap">
+<nav>
+<strong>ADAMYA / CLOUD ENGINEERING</strong>
+<a href="https://github.com/AdamyaVeer-Panwar/aws-secure-static-site">GitHub Repository ↗</a>
+</nav>
+
+<section class="hero">
+<div class="tag">AWS CLOUD INFRASTRUCTURE PROJECT</div>
+<h1>Secure content delivery.<br><span>Private by design.</span></h1>
+<p>A Terraform-managed cloud infrastructure reference project demonstrating secure static website delivery using Amazon S3 and Amazon CloudFront.</p>
+<a class="btn" href="https://github.com/AdamyaVeer-Panwar/aws-secure-static-site">Explore Source Code ↗</a>
+<a class="btn alt" href="https://github.com/AdamyaVeer-Panwar/aws-secure-static-site/actions">View CI Pipeline ↗</a>
+</section>
+
+<div class="notice">
+<strong>Deployment status:</strong> Infrastructure configuration and automated validation are available in the repository. AWS deployment has not yet been performed. This project overview is hosted separately using GitHub Pages.
+</div>
+
+<h2>01 / System Architecture</h2>
+<p>Public traffic reaches CloudFront over HTTPS. CloudFront accesses the private S3 origin using Origin Access Control.</p>
+<div class="arch">
+<div class="card"><h3>Visitor</h3><p>HTTPS browser request</p></div>
+<div class="arrow">→</div>
+<div class="card"><h3>CloudFront</h3><p>Global delivery, caching and OAC</p></div>
+<div class="arrow">→</div>
+<div class="card"><h3>Private S3</h3><p>Encrypted static asset storage</p></div>
+</div>
+
+<h2>02 / Engineering Components</h2>
+<div class="grid">
+<div class="card"><small>STORAGE</small><h3>Amazon S3</h3><p>Private bucket, blocked public access, versioning and server-side encryption.</p></div>
+<div class="card"><small>DELIVERY</small><h3>CloudFront</h3><p>Content delivery with HTTPS redirection and origin access control.</p></div>
+<div class="card"><small>SECURITY</small><h3>IAM & OAC</h3><p>Restricted origin access and scoped bucket policy.</p></div>
+<div class="card"><small>IaC</small><h3>Terraform</h3><p>Repeatable infrastructure provisioning and resource management.</p></div>
+<div class="card"><small>CI/CD</small><h3>GitHub Actions</h3><p>Automated Terraform formatting and configuration validation.</p></div>
+<div class="card"><small>OPERATIONS</small><h3>Cost & Cleanup</h3><p>Documented deployment, output inspection and infrastructure teardown.</p></div>
+</div>
+
+<h2>03 / Verification</h2>
+<div class="grid">
+<div class="card"><h3>Source Code</h3><p>Terraform and website implementation committed to a public repository.</p></div>
+<div class="card"><h3>CI Validation</h3><p>Terraform CI workflow successfully completed.</p></div>
+<div class="card"><h3>AWS Runtime</h3><p>Live cloud deployment remains pending verification.</p></div>
+</div>
+
+<h2>04 / Technology Stack</h2>
+<p>Amazon Web Services · S3 · CloudFront · IAM · Terraform · GitHub Actions · HTML · Git</p>
+
+<footer>
+Built by Adamya Panwar · AWS Cloud Engineering Project<br>
+<a href="https://github.com/AdamyaVeer-Panwar/aws-secure-static-site">View source repository</a>
+</footer>
+</div>
 </body>
 </html>
